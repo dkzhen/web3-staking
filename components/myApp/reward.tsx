@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 import { abiStakingContract } from "@/app/abi";
 import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
-import { getStakerInfo } from "./contract";
+import { GetStakerInfo } from "./contract";
 import { BigNumber, ethers } from "ethers";
 import { formatNumber } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -17,7 +17,7 @@ function RewardCard() {
   const { writeContract } = useWriteContract();
   const { address } = useAccount();
   const accountAddress = address || "";
-  const { stakerInfo, isPendingStakerInfo } = getStakerInfo(accountAddress);
+  const { stakerInfo, isPendingStakerInfo } = GetStakerInfo(accountAddress);
   // checking balance
   const bigIntStakerInfo = isPendingStakerInfo
     ? [BigNumber.from(0), BigNumber.from(0)] // Jika pending, kembalikan array dengan dua elemen

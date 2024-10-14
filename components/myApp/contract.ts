@@ -2,7 +2,7 @@ import { client } from "@/app/config";
 import { defineChain, getContract } from "thirdweb";
 import { useReadContract } from "thirdweb/react";
 
-export function getUSDCContract(accountAddress: string) {
+export function GetUSDCContract(accountAddress: string) {
     const contract = getContract({
         client: client,
         chain: defineChain(1301),
@@ -17,7 +17,7 @@ export function getUSDCContract(accountAddress: string) {
 
       return { USDCData : data, isPendingUSDC : isPending };
 }
-export function getZHNContract(accountAddress: string) {
+export function GetZHNContract(accountAddress: string) {
     const contract = getContract({
         client: client,
         chain: defineChain(1301),
@@ -32,7 +32,7 @@ export function getZHNContract(accountAddress: string) {
 
       return { ZHNData : data, isPendingZHN : isPending };
 }
-export const getAllowanceSpender= (owner: string, spender: string) => {
+export const GetAllowanceSpender= (owner: string, spender: string) => {
     const contract = getContract({
         client: client,
         chain: defineChain(1301),
@@ -47,7 +47,7 @@ export const getAllowanceSpender= (owner: string, spender: string) => {
 
       return { allowanceData : data, isPendingAllowance : isPending };
 } 
-export const getStakerInfo= (address:string) => {
+export const GetStakerInfo= (address:string) => {
     const contract = getContract({
         client: client,
         chain: defineChain(1301),
@@ -62,7 +62,7 @@ export const getStakerInfo= (address:string) => {
 
       return { stakerInfo : data, isPendingStakerInfo : isPending };
 } 
-export const getFaucetBalance= () => {
+export const GetFaucetBalance= () => {
     const contract = getContract({
         client: client,
         chain: defineChain(1301),

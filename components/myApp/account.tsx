@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 import { BigNumber, ethers } from "ethers";
 import { formatNumber } from "@/lib/utils";
-import { getUSDCContract, getZHNContract } from "./contract";
+import { GetUSDCContract, GetZHNContract } from "./contract";
 import StakingCard from "./staking-card";
 import RewardCard from "./reward";
 import Faucet from "./faucet";
@@ -24,8 +24,8 @@ export function Account() {
     address: address,
   });
   const stringBalance = balance.data?.formatted || 0;
-  const { USDCData, isPendingUSDC } = getUSDCContract(accountAddress);
-  const { ZHNData, isPendingZHN } = getZHNContract(accountAddress);
+  const { USDCData, isPendingUSDC } = GetUSDCContract(accountAddress);
+  const { ZHNData, isPendingZHN } = GetZHNContract(accountAddress);
 
   const bigIntUSDC = isPendingUSDC
     ? BigNumber.from(0)

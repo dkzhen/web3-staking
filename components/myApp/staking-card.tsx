@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 
 import { abiStakingContract, abiUSDC } from "@/app/abi";
 import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
-import { getAllowanceSpender } from "./contract";
+import { GetAllowanceSpender } from "./contract";
 
 function StakingCard() {
   const { address } = useAccount();
@@ -23,7 +23,7 @@ function StakingCard() {
   const stakingContract = "0xd8995f43f2152Ea7F73f3630a98710F1fD520859";
 
   //   check allowance
-  const { allowanceData, isPendingAllowance } = getAllowanceSpender(
+  const { allowanceData, isPendingAllowance } = GetAllowanceSpender(
     accountAddress,
     "0xd8995f43f2152Ea7F73f3630a98710F1fD520859"
   );
