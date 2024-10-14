@@ -12,7 +12,8 @@ import { Button } from "../ui/button";
 
 import { abiStakingContract, abiUSDC } from "@/app/abi";
 import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
-import { GetAllowanceSpender } from "./contract";
+import { GetAllowanceSpender, GetUSDCContract } from "./contract";
+import { formatNumber } from "@/lib/utils";
 
 function StakingCard() {
   const { address } = useAccount();
@@ -21,6 +22,14 @@ function StakingCard() {
   const [amount, setAmount] = React.useState(0);
   const weiValue = ethers.utils.parseUnits(amount.toString(), 18);
   const stakingContract = "0xd8995f43f2152Ea7F73f3630a98710F1fD520859";
+
+  //   usdc balance
+  const { USDCData, isPendingUSDC } = GetUSDCContract(accountAddress);
+
+  const bigIntUSDC = isPendingUSDC
+    ? BigNumber.from(0)
+    : BigNumber.from(USDCData);
+  const zUSDC = ethers.utils.formatEther(bigIntUSDC);
 
   //   check allowance
   const { allowanceData, isPendingAllowance } = GetAllowanceSpender(
@@ -61,6 +70,7 @@ function StakingCard() {
           placeholder="amount zUSDC"
           type="number"
           min={0}
+          value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
         />
       </CardContent>
@@ -72,14 +82,26 @@ function StakingCard() {
             Approve
           </Button>
         ) : (
-          <Button
-            disabled={
-              !Boolean(stakeContract.data?.request) || Number(amount) <= 0
-            }
-            onClick={() => writeContract(stakeContract.data!.request)}
-          >
-            Stake
-          </Button>
+          <div className="flex flex-row justify-start items-center">
+            <Button
+              disabled={
+                !Boolean(stakeContract.data?.request) || Number(amount) <= 0
+              }
+              onClick={() => {
+                Number(amount) > Number(zUSDC)
+                  ? setAmount(Number(zUSDC))
+                  : writeContract(stakeContract.data!.request);
+              }}
+            >
+              Stake
+            </Button>
+            <div
+              className="text-xs text-slate-400 ml-4 cursor-pointer"
+              onClick={() => setAmount(Number(zUSDC))}
+            >
+              max: {formatNumber(Number(zUSDC))}
+            </div>
+          </div>
         )}
       </CardFooter>
     </Card>

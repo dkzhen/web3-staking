@@ -8,7 +8,7 @@ import {
 } from "../ui/card";
 import { abiStakingContract } from "@/app/abi";
 import { useAccount, useSimulateContract, useWriteContract } from "wagmi";
-import { GetStakerInfo } from "./contract";
+import { GetAllRewardBalance, GetStakerInfo } from "./contract";
 import { BigNumber, ethers } from "ethers";
 import { formatNumber } from "@/lib/utils";
 import { Button } from "../ui/button";
@@ -18,6 +18,7 @@ function RewardCard() {
   const { address } = useAccount();
   const accountAddress = address || "";
   const { stakerInfo, isPendingStakerInfo } = GetStakerInfo(accountAddress);
+  const { rewardsBalance, isPendingRewardsBalance } = GetAllRewardBalance();
   // checking balance
   const bigIntStakerInfo = isPendingStakerInfo
     ? [BigNumber.from(0), BigNumber.from(0)] // Jika pending, kembalikan array dengan dua elemen
@@ -29,6 +30,11 @@ function RewardCard() {
     ethers.utils.formatEther(bigIntStakerInfo[0]),
     ethers.utils.formatEther(bigIntStakerInfo[1]),
   ];
+
+  const bigIntRewardsbalance = isPendingRewardsBalance
+    ? BigNumber.from(0)
+    : BigNumber.from(rewardsBalance);
+  const ZHNRewardBalance = ethers.utils.formatEther(bigIntRewardsbalance);
 
   // claim
   const claimRewards = useSimulateContract({
@@ -43,6 +49,7 @@ function RewardCard() {
         <CardTitle>Claim Rewards</CardTitle>
       </CardHeader>
       <CardContent>
+        <p>Rewards Remaining : {formatNumber(Number(ZHNRewardBalance))} ZHN</p>
         <p>Total Staked : {formatNumber(Number(stakerBalance[0]))} zUSDC</p>
         <p>Unclaimed Token : {Number(stakerBalance[1]).toFixed(4)} ZHN</p>
       </CardContent>

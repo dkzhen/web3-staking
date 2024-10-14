@@ -76,6 +76,21 @@ export const GetFaucetBalance= () => {
 
       return { faucetBalance : data, isPendingFaucetBalance : isPending };
 } 
+export const GetAllRewardBalance= () => {
+    const contract = getContract({
+        client: client,
+        chain: defineChain(1301),
+        address: "0xd8995f43f2152Ea7F73f3630a98710F1fD520859",
+      });
+    
+      const { data, isPending } = useReadContract({
+        contract,
+        method: "function getRewardTokenBalance() view returns (uint256)",
+        params: []
+      });
+
+      return { rewardsBalance : data, isPendingRewardsBalance : isPending };
+} 
 
  
 
