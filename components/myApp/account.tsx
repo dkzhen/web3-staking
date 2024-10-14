@@ -8,9 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-import { defineChain, getContract } from "thirdweb";
-import { client } from "@/app/config";
-import { useReadContract } from "thirdweb/react";
+
 import { BigNumber, ethers } from "ethers";
 import { formatNumber } from "@/lib/utils";
 import { getUSDCContract, getZHNContract } from "./contract";

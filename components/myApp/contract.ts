@@ -1,6 +1,6 @@
 import { client } from "@/app/config";
-import { defineChain, getContract, prepareContractCall } from "thirdweb";
-import { useReadContract, useSendTransaction } from "thirdweb/react";
+import { defineChain, getContract } from "thirdweb";
+import { useReadContract } from "thirdweb/react";
 
 export function getUSDCContract(accountAddress: string) {
     const contract = getContract({

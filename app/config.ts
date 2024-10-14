@@ -1,6 +1,6 @@
 import { createThirdwebClient } from 'thirdweb';
 import { http, createConfig } from 'wagmi'
-import { mainnet, sepolia, unichainSepolia } from 'wagmi/chains'
+import {  unichainSepolia } from 'wagmi/chains'
 import { injected, metaMask, safe } from 'wagmi/connectors'
 
 export const config = createConfig({

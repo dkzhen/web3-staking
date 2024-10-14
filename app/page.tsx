@@ -1,10 +1,8 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Button } from "@/components/ui/button";
 import { config } from "./config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Profile } from "@/components/myApp/profile";
-import { useAccount, WagmiProvider } from "wagmi";
+import { WagmiProvider } from "wagmi";
 import { ThirdwebProvider } from "thirdweb/react";
 
 export default function Home() {
