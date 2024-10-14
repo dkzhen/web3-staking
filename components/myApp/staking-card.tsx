@@ -87,11 +87,7 @@ function StakingCard() {
               disabled={
                 !Boolean(stakeContract.data?.request) || Number(amount) <= 0
               }
-              onClick={() => {
-                Number(amount) > Number(zUSDC)
-                  ? setAmount(Number(zUSDC))
-                  : writeContract(stakeContract.data!.request);
-              }}
+              onClick={() => writeContract(stakeContract.data!.request)}
             >
               Stake
             </Button>
